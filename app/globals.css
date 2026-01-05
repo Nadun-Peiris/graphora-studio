@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
-/* =========================
-   Root theme variables
-   ========================= */
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --chili: #dd1f04;
+  --sunset: #fa8130;
+  --amber: #fab12f;
+  --grid-size: 70px;
+  --font-heading: var(--font-museomoderno);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -18,62 +20,280 @@
   --font-mono: var(--font-mono);
 }
 
-/* =========================
-   Base styles
-   ========================= */
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* =========================
-   Animated Grid Background
-   ========================= */
-.bg-grid {
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: gridMove 18s linear infinite;
-  mask-image: radial-gradient(circle at center, black 45%, transparent 75%);
-}
-
-@keyframes gridMove {
-  from {
-    background-position: 0 0, 0 0;
+@layer base {
+  html,
+  body {
+    width: 100%;
+    height: 100%;
   }
-  to {
-    background-position: 0 60px, 0 60px;
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .font-heading {
+    font-family: var(--font-heading), "MuseoModerno", system-ui, sans-serif;
   }
 }
 
-/* =========================
-   Glow Gradient
-   ========================= */
-.bg-gradient-radial {
-  background: radial-gradient(
-    circle,
-    rgba(0, 178, 250, 0.18),
-    rgba(0, 178, 250, 0.08),
-    transparent 70%
-  );
-  filter: blur(80px);
+@layer utilities {
+  /* Animated Grid Background */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(250, 129, 48, 0.26) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(250, 129, 48, 0.26) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+    opacity: 0.55;
+    mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.95) 40%, transparent 75%);
+    -webkit-mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.95) 40%, transparent 75%);
+  }
+
+  /* Sweeping line accents */
+  .grid-line {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(250, 129, 48, 0.4) 32%,
+      rgba(250, 177, 47, 0.9) 50%,
+      rgba(221, 31, 4, 0.45) 68%,
+      transparent 100%
+    );
+    box-shadow:
+      0 0 14px rgba(250, 177, 47, 0.4),
+      0 0 26px rgba(250, 129, 48, 0.35);
+    filter: drop-shadow(0 0 18px rgba(221, 31, 4, 0.4));
+    mix-blend-mode: screen;
+    opacity: 0.95;
+  }
+
+  .grid-line-h {
+    height: 2px;
+    width: 200%;
+    left: -50%;
+    top: calc(var(--grid-size) * var(--row, 1));
+    animation: sweep-x-forward 9s linear infinite;
+  }
+
+  .grid-line-h-reverse {
+    height: 2px;
+    width: 200%;
+    left: -50%;
+    top: calc(var(--grid-size) * var(--row, 1));
+    animation: sweep-x-reverse 11s linear infinite;
+  }
+
+  .grid-line-v {
+    width: 2px;
+    height: 200%;
+    top: -50%;
+    left: calc(var(--grid-size) * var(--col, 1));
+    animation: sweep-y-forward 12s linear infinite;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(250, 129, 48, 0.4) 32%,
+      rgba(250, 177, 47, 0.9) 50%,
+      rgba(221, 31, 4, 0.45) 68%,
+      transparent 100%
+    );
+  }
+
+  .grid-line-v-reverse {
+    width: 2px;
+    height: 200%;
+    top: -50%;
+    left: calc(var(--grid-size) * var(--col, 1));
+    animation: sweep-y-reverse 10s linear infinite;
+    background: linear-gradient(
+      0deg,
+      transparent 0%,
+      rgba(250, 129, 48, 0.4) 32%,
+      rgba(250, 177, 47, 0.9) 50%,
+      rgba(221, 31, 4, 0.45) 68%,
+      transparent 100%
+    );
+  }
+
+  .grid-line-delay-1 {
+    animation-delay: -2.5s;
+  }
+
+  .grid-line-delay-2 {
+    animation-delay: -4s;
+  }
+
+  .grid-line-delay-3 {
+    animation-delay: -6s;
+  }
+
+  @keyframes sweep-x-forward {
+    0% {
+      transform: translateX(-35%);
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    88% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(135%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes sweep-x-reverse {
+    0% {
+      transform: translateX(135%);
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    88% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-35%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes sweep-y-forward {
+    0% {
+      transform: translateY(135%);
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    88% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-35%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes sweep-y-reverse {
+    0% {
+      transform: translateY(-35%);
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    88% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(135%);
+      opacity: 0;
+    }
+  }
+
+  /* Random glow pulse */
+  .glow-pulse {
+    animation: glowPulse 12s ease-in-out infinite;
+  }
+
+  .glow-pulse-delay-1 {
+    animation-delay: -3s;
+    animation-duration: 14s;
+  }
+
+  .glow-pulse-delay-2 {
+    animation-delay: -6s;
+    animation-duration: 16s;
+  }
+
+  @keyframes glowPulse {
+    0% {
+      opacity: 0.1;
+      transform: scale(0.85);
+    }
+    20% {
+      opacity: 0.5;
+      transform: scale(1.05);
+    }
+    45% {
+      opacity: 0.28;
+      transform: scale(0.95);
+    }
+    70% {
+      opacity: 0.6;
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 0.12;
+      transform: scale(0.9);
+    }
+  }
+
+  /* Cursor glow */
+  .cursor-glow {
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(
+      circle,
+      rgba(250, 129, 48, 0.38) 0%,
+      rgba(250, 177, 47, 0.26) 35%,
+      transparent 70%
+    );
+    filter: blur(65px);
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity 220ms ease, transform 90ms ease-out;
+    will-change: transform, opacity;
+  }
+
+  /* Cursor dot */
+  .cursor-dot {
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(250, 177, 47, 0.6);
+    background: radial-gradient(circle, rgba(250, 129, 48, 0.6), rgba(221, 31, 4, 0.2));
+    box-shadow:
+      0 0 12px rgba(250, 177, 47, 0.65),
+      0 0 24px rgba(250, 129, 48, 0.4);
+    border-radius: 9999px;
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity 220ms ease, transform 90ms ease-out;
+    will-change: transform, opacity;
+  }
+
+  /* Glow Gradient */
+  .bg-gradient-radial {
+    background: radial-gradient(
+      circle,
+      rgba(250, 177, 47, 0.35) 0%,
+      rgba(250, 129, 48, 0.45) 40%,
+      transparent 70%
+    );
+    filter: blur(110px);
+    opacity: 0.8;
+  }
 }
 
-/* =========================
-   Noise / Grain Overlay
-   ========================= */
-.noise {
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+@media (prefers-reduced-motion: reduce) {
+  .bg-grid {
+    animation: none;
+  }
+
+  .grid-line {
+    animation: none;
+  }
+
+  .cursor-glow,
+  .cursor-dot {
+    display: none;
+  }
 }
