@@ -1,8 +1,14 @@
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-black text-white">
-      {/* Animated background */}
-      <div className="absolute inset-0 -z-10 bg-grid" />
+      {/* Animated grid */}
+      <div className="absolute inset-0 bg-grid -z-20" />
+
+      {/* Glow gradients */}
+      <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-radial -z-10" />
+
+      {/* Noise overlay */}
+      <div className="absolute inset-0 noise -z-10 opacity-40" />
 
       {/* Content */}
       <div className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center">
@@ -16,7 +22,7 @@ export default function Home() {
 
         <p className="mt-6 text-lg text-gray-400 max-w-2xl">
           We’re building a modern digital studio focused on web development,
-          branding, and creative solutions.
+          branding, and creative digital solutions.
         </p>
 
         <footer className="mt-12 text-sm text-gray-600">
