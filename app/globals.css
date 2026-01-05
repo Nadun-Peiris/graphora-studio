@@ -37,7 +37,7 @@
   }
 
   .font-heading {
-    font-family: var(--font-heading), "MuseoModerno", system-ui, sans-serif;
+    font-family: var(--font-heading), "MuseoModerno", system-ui, sans-serif !important;
   }
 }
 

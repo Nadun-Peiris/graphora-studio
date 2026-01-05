@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { FaWhatsapp } from "react-icons/fa6";
+import { FiMail } from "react-icons/fi";
 
 export default function Home() {
   const [cursorVisible, setCursorVisible] = useState(false);
@@ -95,11 +97,17 @@ export default function Home() {
 
       {/* Content */}
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
-        <h1 className="font-heading mb-4 text-3xl font-semibold tracking-tight text-sky-100">
+        <h1
+          className="font-heading mb-4 text-3xl font-semibold tracking-tight text-sky-100"
+          style={{ fontFamily: 'var(--font-heading), "MuseoModerno", system-ui, sans-serif' }}
+        >
           Graphora Studio
         </h1>
 
-        <h2 className="text-5xl font-bold tracking-tight sm:text-6xl">
+        <h2
+          className="font-heading text-5xl font-bold tracking-tight sm:text-6xl"
+          style={{ fontFamily: 'var(--font-heading), "MuseoModerno", system-ui, sans-serif' }}
+        >
           Coming Soon.
         </h2>
 
@@ -111,19 +119,21 @@ export default function Home() {
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
           <a
             href="https://wa.me/94766005631"
-            className="rounded-full border border-white/60 bg-white/10 px-7 py-3 text-sm font-medium text-white shadow-[0_12px_30px_-18px_rgba(255,255,255,0.9)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-white/15 hover:border-white hover:shadow-[0_15px_35px_-18px_rgba(255,255,255,0.95)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/60 bg-white/10 px-7 py-3 text-sm font-medium text-white shadow-[0_12px_30px_-18px_rgba(255,255,255,0.9)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-white/15 hover:border-white hover:shadow-[0_15px_35px_-18px_rgba(255,255,255,0.95)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+            <FaWhatsapp aria-hidden />
             WhatsApp +94 76 600 5631
           </a>
           <a
             href="mailto:graphorastudiopvtltd@gmail.com"
-            className="rounded-full border border-white/60 bg-white/10 px-7 py-3 text-sm font-medium text-white shadow-[0_12px_30px_-18px_rgba(255,255,255,0.9)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-white/15 hover:border-white hover:shadow-[0_15px_35px_-18px_rgba(255,255,255,0.95)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/60 bg-white/10 px-7 py-3 text-sm font-medium text-white shadow-[0_12px_30px_-18px_rgba(255,255,255,0.9)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-white/15 hover:border-white hover:shadow-[0_15px_35px_-18px_rgba(255,255,255,0.95)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
+            <FiMail aria-hidden />
             graphorastudiopvtltd@gmail.com
           </a>
         </div>
 
-        <footer className="mt-12 text-sm text-white">
+        <footer className="absolute bottom-6 left-1/2 -translate-x-1/2 text-sm text-white">
           © 2026 Graphora Studio
         </footer>
       </div>
